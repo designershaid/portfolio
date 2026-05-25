@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shaid All Mahmud — T-Shirt Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #f9f5ef;
+    --dark: #1a1714;
+    --charcoal: #2e2b28;
+    --mid: #6b6762;
+    --accent: #b5823a;
+    --accent-light: #e8d5b5;
+    --border: rgba(26,23,20,0.12);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 4rem;
+    background: rgba(249,245,239,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--dark);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--dark); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    right: -80px; top: 10%;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-light) 0%, transparent 70%);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-label {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-label::before {
+    content: '';
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--accent);
+  }
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--dark);
+    margin-bottom: 0.4rem;
+    animation: fadeUp 0.9s ease both;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-tagline {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--mid);
+    font-style: italic;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.9s 0.15s ease both;
+  }
+  .hero-desc {
+    font-size: 0.95rem;
+    color: var(--mid);
+    max-width: 400px;
+    margin-bottom: 3rem;
+    animation: fadeUp 0.9s 0.25s ease both;
+  }
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.9s 0.35s ease both;
+  }
+  .btn-primary {
+    display: inline-block;
+    padding: 0.85rem 2.2rem;
+    background: var(--dark);
+    color: var(--cream);
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.25s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--charcoal); transform: translateY(-1px); }
+  .btn-outline {
+    display: inline-block;
+    padding: 0.85rem 2.2rem;
+    border: 1px solid var(--dark);
+    color: var(--dark);
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.25s, color 0.25s;
+  }
+  .btn-outline:hover { background: var(--dark); color: var(--cream); }
+
+  /* HERO VISUAL */
+  .hero-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: fadeIn 1.2s 0.3s ease both;
+  }
+  .shirt-showcase {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+  }
+  .showcase-frame {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: var(--charcoal);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .showcase-frame svg { width: 65%; height: auto; opacity: 0.92; }
+  .showcase-tag {
+    position: absolute;
+    bottom: -1px; right: -1px;
+    background: var(--accent);
+    color: white;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.2rem;
+    font-weight: 500;
+  }
+  .stat-bubble {
+    position: absolute;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    padding: 1rem 1.4rem;
+    font-family: var(--sans);
+  }
+  .stat-bubble.top-left { top: 2rem; left: -2rem; }
+  .stat-bubble.bottom-right { bottom: 3rem; right: -2rem; }
+  .stat-bubble .num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--dark);
+    line-height: 1;
+  }
+  .stat-bubble .label {
+    font-size: 0.72rem;
+    color: var(--mid);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* SECTION BASE */
+  section { padding: 7rem 4rem; }
+  .section-label {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 24px; height: 1px;
+    background: var(--accent);
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+  }
+  .section-title em { font-style: italic; color: var(--accent); }
+
+  /* ABOUT */
+  .about { background: white; }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    margin-top: 3.5rem;
+  }
+  .about-text p {
+    font-size: 0.95rem;
+    color: var(--mid);
+    margin-bottom: 1.25rem;
+    line-height: 1.8;
+  }
+  .about-skills { margin-top: 2rem; }
+  .about-skills h4 {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--dark);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .skills-list {
+    display: flex; flex-wrap: wrap; gap: 0.6rem;
+  }
+  .skill-pill {
+    font-size: 0.78rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--border);
+    color: var(--charcoal);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    background: var(--cream);
+  }
+  .about-image-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .about-img-card {
+    aspect-ratio: 3/4;
+    background: var(--charcoal);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .about-img-card:first-child { margin-top: 2rem; }
+  .about-img-card svg { width: 60%; height: auto; opacity: 0.8; }
+  .about-img-card .card-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(26,23,20,0.7);
+    color: rgba(249,245,239,0.9);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 0.5rem;
+  }
+
+  /* PORTFOLIO */
+  .portfolio { background: var(--cream); }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+  .portfolio-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--charcoal);
+  }
+  .portfolio-item:first-child { grid-column: span 2; }
+  .portfolio-item .p-inner {
+    aspect-ratio: 4/3;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .portfolio-item:first-child .p-inner { aspect-ratio: 16/9; }
+  .portfolio-item svg { width: 45%; height: auto; transition: transform 0.5s ease; }
+  .portfolio-item:hover svg { transform: scale(1.06); }
+  .p-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(26,23,20,0.85) 0%, transparent 55%);
+    opacity: 0;
+    transition: opacity 0.35s;
+    display: flex; align-items: flex-end;
+    padding: 1.5rem;
+  }
+  .portfolio-item:hover .p-overlay { opacity: 1; }
+  .p-info h3 {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 0.2rem;
+  }
+  .p-info span {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+  }
+  .p-num {
+    position: absolute;
+    top: 1rem; left: 1rem;
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    color: rgba(249,245,239,0.5);
+    letter-spacing: 0.05em;
+  }
+
+  /* SERVICES */
+  .services { background: var(--dark); }
+  .services .section-label { color: var(--accent); }
+  .services .section-label::before { background: var(--accent); }
+  .services .section-title { color: var(--cream); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    margin-top: 4rem;
+    border: 1px solid rgba(249,245,239,0.08);
+  }
+  .service-card {
+    padding: 2.5rem;
+    border-right: 1px solid rgba(249,245,239,0.08);
+    border-bottom: 1px solid rgba(249,245,239,0.08);
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+  .service-card:hover::before { opacity: 0.07; }
+  .service-card:last-child { border-right: none; }
+  .service-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+  .service-card h3 {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 0.8rem;
+  }
+  .service-card p {
+    font-size: 0.88rem;
+    color: rgba(249,245,239,0.55);
+    line-height: 1.75;
+  }
+
+  /* PROCESS */
+  .process { background: white; }
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 4rem;
+    position: relative;
+  }
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 2rem; left: 2rem; right: 2rem;
+    height: 1px;
+    background: var(--border);
+    z-index: 0;
+  }
+  .step {
+    padding: 0 2rem 2rem 0;
+    position: relative;
+    z-index: 1;
+  }
+  .step-num {
+    width: 4rem; height: 4rem;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .step h3 {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+  }
+  .step p { font-size: 0.85rem; color: var(--mid); line-height: 1.7; }
+
+  /* CONTACT */
+  .contact { background: var(--cream); }
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    margin-top: 3.5rem;
+    align-items: start;
+  }
+  .contact-info p {
+    font-size: 0.95rem;
+    color: var(--mid);
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+  .contact-details { display: flex; flex-direction: column; gap: 1.2rem; }
+  .contact-row {
+    display: flex; align-items: center; gap: 1rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .contact-row:last-child { border-bottom: none; }
+  .contact-row .icon {
+    width: 2.5rem; height: 2.5rem;
+    background: var(--accent-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .contact-row .detail span {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 0.1rem;
+  }
+  .contact-row .detail strong {
+    font-weight: 400;
+    font-size: 0.9rem;
+    color: var(--dark);
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+  .form-group label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-weight: 400;
+  }
+  .form-group input,
+  .form-group textarea {
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--border);
+    background: white;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    color: var(--dark);
+    outline: none;
+    transition: border-color 0.2s;
+    resize: vertical;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus { border-color: var(--accent); }
+  .form-group textarea { min-height: 130px; }
+  .form-submit {
+    padding: 1rem 2.5rem;
+    background: var(--dark);
+    color: var(--cream);
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.25s;
+    align-self: flex-start;
+  }
+  .form-submit:hover { background: var(--accent); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    padding: 3rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(249,245,239,0.08);
+  }
+  footer .footer-brand {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--cream);
+  }
+  footer .footer-copy {
+    font-size: 0.78rem;
+    color: rgba(249,245,239,0.35);
+  }
+  footer .footer-links {
+    display: flex; gap: 1.5rem; list-style: none;
+  }
+  footer .footer-links a {
+    font-size: 0.78rem;
+    color: rgba(249,245,239,0.5);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
+  }
+  footer .footer-links a:hover { color: var(--accent); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    section { padding: 5rem 1.5rem; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+    .hero-visual { display: none; }
+    .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .portfolio-grid { grid-template-columns: 1fr 1fr; }
+    .portfolio-item:first-child { grid-column: span 2; }
+    .services-grid, .process-steps { grid-template-columns: 1fr 1fr; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+  }
+  @media (max-width: 580px) {
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .portfolio-item:first-child { grid-column: span 1; }
+    .services-grid, .process-steps { grid-template-columns: 1fr; }
+    .process-steps::before { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Shaid All Mahmud</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#portfolio">Work</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-text">
+    <div class="hero-label">T-Shirt Designer</div>
+    <h1 class="hero-name">Shaid All<br><em>Mahmud</em></h1>
+    <p class="hero-tagline">Crafting wearable art, one stitch at a time.</p>
+    <p class="hero-desc">Professional t-shirt designer with a passion for bold concepts, refined execution, and designs that speak without words.</p>
+    <div class="hero-actions">
+      <a href="#portfolio" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="shirt-showcase">
+      <div class="showcase-frame">
+        <!-- T-Shirt SVG Illustration -->
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <path d="M40,50 L20,90 L50,95 L50,175 L150,175 L150,95 L180,90 L160,50 L130,65 Q100,75 70,65 Z" fill="#f9f5ef" stroke="#b5823a" stroke-width="1.5"/>
+          <path d="M70,65 Q100,75 130,65 Q115,35 100,30 Q85,35 70,65Z" fill="#e8d5b5" stroke="#b5823a" stroke-width="1"/>
+          <!-- Design on shirt -->
+          <circle cx="100" cy="120" r="22" fill="none" stroke="#b5823a" stroke-width="1.5"/>
+          <text x="100" y="115" text-anchor="middle" font-family="Georgia,serif" font-size="9" fill="#b5823a" font-style="italic">wearable</text>
+          <text x="100" y="127" text-anchor="middle" font-family="Georgia,serif" font-size="9" fill="#b5823a" font-style="italic">art</text>
+          <line x1="78" y1="118" x2="85" y2="118" stroke="#b5823a" stroke-width="0.8"/>
+          <line x1="115" y1="118" x2="122" y2="118" stroke="#b5823a" stroke-width="0.8"/>
+        </svg>
+        <div class="showcase-tag">Featured Design</div>
+      </div>
+      <div class="stat-bubble top-left">
+        <div class="num">200+</div>
+        <div class="label">Designs Created</div>
+      </div>
+      <div class="stat-bubble bottom-right">
+        <div class="num">5★</div>
+        <div class="label">Client Rating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-label">About Me</div>
+  <h2 class="section-title">Design is not just <em>decoration</em> —<br>it's communication.</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm Shaid All Mahmud, a professional t-shirt designer dedicated to transforming ideas into compelling wearable art. With a deep understanding of print techniques, typography, and visual storytelling, I create designs that resonate with audiences and stand the test of time.</p>
+      <p>Whether you're a brand looking for a signature collection, a small business wanting custom merchandise, or an individual with a creative vision, I bring precision and passion to every project.</p>
+      <div class="about-skills">
+        <h4>Expertise</h4>
+        <div class="skills-list">
+          <span class="skill-pill">Graphic Design</span>
+          <span class="skill-pill">Typography</span>
+          <span class="skill-pill">Screen Printing</span>
+          <span class="skill-pill">DTG Printing</span>
+          <span class="skill-pill">Adobe Illustrator</span>
+          <span class="skill-pill">Photoshop</span>
+          <span class="skill-pill">Brand Identity</span>
+          <span class="skill-pill">Merch Design</span>
+        </div>
+      </div>
+    </div>
+    <div class="about-image-grid">
+      <div class="about-img-card">
+        <svg viewBox="0 0 160 180" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30,45 L15,75 L38,80 L38,145 L122,145 L122,80 L145,75 L130,45 L105,56 Q80,64 55,56Z" fill="#f9f5ef" stroke="#b5823a" stroke-width="1.2"/>
+          <path d="M55,56 Q80,64 105,56 Q92,28 80,24 Q68,28 55,56Z" fill="#e8d5b5" stroke="#b5823a" stroke-width="1"/>
+          <text x="80" y="98" text-anchor="middle" font-family="Georgia,serif" font-size="20" font-weight="bold" fill="#1a1714">SAM</text>
+          <line x1="55" y1="106" x2="105" y2="106" stroke="#b5823a" stroke-width="0.8"/>
+        </svg>
+        <div class="card-label">Monogram Series</div>
+      </div>
+      <div class="about-img-card">
+        <svg viewBox="0 0 160 180" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30,45 L15,75 L38,80 L38,145 L122,145 L122,80 L145,75 L130,45 L105,56 Q80,64 55,56Z" fill="#2e2b28" stroke="#b5823a" stroke-width="1.2"/>
+          <path d="M55,56 Q80,64 105,56 Q92,28 80,24 Q68,28 55,56Z" fill="#444" stroke="#b5823a" stroke-width="1"/>
+          <polygon points="80,78 95,105 65,105" fill="none" stroke="#b5823a" stroke-width="1.2"/>
+          <circle cx="80" cy="115" r="3" fill="#b5823a"/>
+          <line x1="60" y1="125" x2="100" y2="125" stroke="#b5823a" stroke-width="0.8"/>
+          <text x="80" y="136" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#e8d5b5" font-style="italic">geometric</text>
+        </svg>
+        <div class="card-label">Geometric Dark</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="section-label">Portfolio</div>
+  <h2 class="section-title">Selected <em>Works</em></h2>
+  <div class="portfolio-grid">
+    <div class="portfolio-item">
+      <div class="p-inner">
+        <span class="p-num">01</span>
+        <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+          <path d="M60,40 L30,80 L65,86 L65,165 L235,165 L235,86 L270,80 L240,40 L195,58 Q150,70 105,58Z" fill="#f9f5ef" stroke="#b5823a" stroke-width="1.5"/>
+          <path d="M105,58 Q150,70 195,58 Q173,20 150,15 Q127,20 105,58Z" fill="#e8d5b5" stroke="#b5823a" stroke-width="1"/>
+          <text x="150" y="105" text-anchor="middle" font-family="Georgia,serif" font-size="24" fill="#1a1714" font-style="italic" font-weight="bold">LIMITLESS</text>
+          <line x1="90" y1="115" x2="210" y2="115" stroke="#b5823a" stroke-width="0.8"/>
+          <text x="150" y="128" text-anchor="middle" font-family="Georgia,serif" font-size="9" fill="#b5823a" letter-spacing="4">COLLECTION 2025</text>
+        </svg>
+        <div class="p-overlay">
+          <div class="p-info">
+            <h3>Limitless Collection</h3>
+            <span>Typography · Fashion</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <div class="p-inner">
+        <span class="p-num">02</span>
+        <svg viewBox="0 0 160 180" xmlns="http://www.w3.org/2000/svg">
+          <path d="M28,42 L12,74 L36,79 L36,148 L124,148 L124,79 L148,74 L132,42 L106,54 Q80,63 54,54Z" fill="#1a1714" stroke="#b5823a" stroke-width="1.2"/>
+          <path d="M54,54 Q80,63 106,54 Q93,25 80,21 Q67,25 54,54Z" fill="#2e2b28" stroke="#b5823a" stroke-width="1"/>
+          <circle cx="80" cy="103" r="25" fill="none" stroke="#b5823a" stroke-width="1"/>
+          <circle cx="80" cy="103" r="18" fill="none" stroke="#b5823a" stroke-width="0.5"/>
+          <text x="80" y="100" text-anchor="middle" font-family="Georgia,serif" font-size="7" fill="#e8d5b5">HAND CRAFTED</text>
+          <text x="80" y="110" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="#b5823a" font-style="italic">Since 2018</text>
+        </svg>
+        <div class="p-overlay">
+          <div class="p-info">
+            <h3>Heritage Dark Series</h3>
+            <span>Vintage · Badge Design</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <div class="p-inner">
+        <span class="p-num">03</span>
+        <svg viewBox="0 0 160 180" xmlns="http://www.w3.org/2000/svg">
+          <path d="M28,42 L12,74 L36,79 L36,148 L124,148 L124,79 L148,74 L132,42 L106,54 Q80,63 54,54Z" fill="#f9f5ef" stroke="#2e2b28" stroke-width="1.2"/>
+          <path d="M54,54 Q80,63 106,54 Q93,25 80,21 Q67,25 54,54Z" fill="#e8d5b5" stroke="#2e2b28" stroke-width="1"/>
+          <line x1="55" y1="80" x2="105" y2="80" stroke="#1a1714" stroke-width="0.8"/>
+          <text x="80" y="95" text-anchor="middle" font-family="Georgia,serif" font-size="16" fill="#1a1714" font-weight="bold">URBAN</text>
+          <text x="80" y="112" text-anchor="middle" font-family="Georgia,serif" font-size="16" fill="#1a1714" font-weight="bold">SPIRIT</text>
+          <line x1="55" y1="118" x2="105" y2="118" stroke="#b5823a" stroke-width="1.5"/>
+          <text x="80" y="132" text-anchor="middle" font-family="Georgia,serif" font-size="7" fill="#b5823a" letter-spacing="3">EST. MMXVIII</text>
+        </svg>
+        <div class="p-overlay">
+          <div class="p-info">
+            <h3>Urban Spirit Line</h3>
+            <span>Streetwear · Typography</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <div class="p-inner">
+        <span class="p-num">04</span>
+        <svg viewBox="0 0 160 180" xmlns="http://www.w3.org/2000/svg">
+          <path d="M28,42 L12,74 L36,79 L36,148 L124,148 L124,79 L148,74 L132,42 L106,54 Q80,63 54,54Z" fill="#2e2b28" stroke="#b5823a" stroke-width="1.2"/>
+          <path d="M54,54 Q80,63 106,54 Q93,25 80,21 Q67,25 54,54Z" fill="#444" stroke="#b5823a" stroke-width="1"/>
+          <!-- Mountain illustration -->
+          <polygon points="80,78 60,125 100,125" fill="none" stroke="#b5823a" stroke-width="1.2"/>
+          <polygon points="65,95 50,125 80,125" fill="none" stroke="rgba(181,130,58,0.5)" stroke-width="0.8"/>
+          <line x1="45" y1="125" x2="115" y2="125" stroke="#b5823a" stroke-width="0.8"/>
+          <text x="80" y="138" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#b5823a" letter-spacing="2">SUMMIT</text>
+        </svg>
+        <div class="p-overlay">
+          <div class="p-info">
+            <h3>Summit Outdoors</h3>
+            <span>Nature · Illustration</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <div class="p-inner">
+        <span class="p-num">05</span>
+        <svg viewBox="0 0 160 180" xmlns="http://www.w3.org/2000/svg">
+          <path d="M28,42 L12,74 L36,79 L36,148 L124,148 L124,79 L148,74 L132,42 L106,54 Q80,63 54,54Z" fill="#f9f5ef" stroke="#1a1714" stroke-width="1.2"/>
+          <path d="M54,54 Q80,63 106,54 Q93,25 80,21 Q67,25 54,54Z" fill="#e8d5b5" stroke="#1a1714" stroke-width="1"/>
+          <!-- Floral illustration -->
+          <circle cx="80" cy="105" r="6" fill="#b5823a"/>
+          <ellipse cx="80" cy="88" rx="5" ry="10" fill="none" stroke="#b5823a" stroke-width="1"/>
+          <ellipse cx="80" cy="122" rx="5" ry="10" fill="none" stroke="#b5823a" stroke-width="1"/>
+          <ellipse cx="65" cy="105" rx="10" ry="5" fill="none" stroke="#b5823a" stroke-width="1"/>
+          <ellipse cx="95" cy="105" rx="10" ry="5" fill="none" stroke="#b5823a" stroke-width="1"/>
+          <ellipse cx="69" cy="94" rx="5" ry="10" fill="none" stroke="#b5823a" stroke-width="1" transform="rotate(45 69 94)"/>
+          <ellipse cx="91" cy="94" rx="5" ry="10" fill="none" stroke="#b5823a" stroke-width="1" transform="rotate(-45 91 94)"/>
+          <ellipse cx="69" cy="116" rx="5" ry="10" fill="none" stroke="#b5823a" stroke-width="1" transform="rotate(-45 69 116)"/>
+          <ellipse cx="91" cy="116" rx="5" ry="10" fill="none" stroke="#b5823a" stroke-width="1" transform="rotate(45 91 116)"/>
+        </svg>
+        <div class="p-overlay">
+          <div class="p-info">
+            <h3>Floral Elegance</h3>
+            <span>Botanical · Fine Line</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-label">What I Offer</div>
+  <h2 class="section-title">Services Built for <em>Your Vision</em></h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">✦</span>
+      <h3>Custom T-Shirt Design</h3>
+      <p>Fully bespoke designs tailored to your brand, event, or creative vision. From concept to print-ready file, I handle every detail with care.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">◈</span>
+      <h3>Brand Merchandise</h3>
+      <p>Cohesive merchandise collections that align with your brand identity. Logos, taglines, and illustrations adapted for apparel with elegance.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">◉</span>
+      <h3>Print-Ready Artwork</h3>
+      <p>Professional file preparation for screen printing, DTG, embroidery, and sublimation. Delivered in all required formats and specifications.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">◇</span>
+      <h3>Typography Design</h3>
+      <p>Sophisticated typographic treatments for quotes, slogans, and brand names — crafted to look stunning on any garment color or fabric.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">○</span>
+      <h3>Illustration & Art</h3>
+      <p>Hand-crafted illustrative designs — from intricate line work to bold graphic art — that transform your t-shirt into a true conversation piece.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">△</span>
+      <h3>Bulk & Event Orders</h3>
+      <p>Specialized support for businesses, bands, charities, and events needing consistent, high-quality designs at scale, on time and on budget.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="section-label">How It Works</div>
+  <h2 class="section-title">A Simple, Refined <em>Process</em></h2>
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Discovery Call</h3>
+      <p>We discuss your vision, target audience, style preferences, and any references you have in mind. No detail is too small.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>Concept & Sketch</h3>
+      <p>I develop initial concepts and rough sketches for your approval before moving into detailed execution.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Design & Refine</h3>
+      <p>The approved concept is developed into a full design. Up to two rounds of revisions are included in every package.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h3>Final Delivery</h3>
+      <p>You receive all print-ready files in the formats you need — along with mockup previews — ready for production.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-label">Get In Touch</div>
+  <h2 class="section-title">Let's Create Something <em>Remarkable</em></h2>
+  <div class="contact-inner">
+    <div class="contact-info">
+      <p>Have a project in mind? I'd love to hear about it. Reach out and let's start a conversation about how we can bring your t-shirt design vision to life.</p>
+      <div class="contact-details">
+        <div class="contact-row">
+          <div class="icon">✉</div>
+          <div class="detail">
+            <span>Email</span>
+            <strong>shahid@example.com</strong>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="icon">📱</div>
+          <div class="detail">
+            <span>WhatsApp / Phone</span>
+            <strong>+880 — — — — — —</strong>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="icon">🌐</div>
+          <div class="detail">
+            <span>Based In</span>
+            <strong>Bangladesh</strong>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="icon">⏱</div>
+          <div class="detail">
+            <span>Response Time</span>
+            <strong>Within 24 hours</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form class="contact-form" onsubmit="return false;">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="e.g. Rahim Uddin" />
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@example.com" />
+      </div>
+      <div class="form-group">
+        <label>Project Type</label>
+        <input type="text" placeholder="e.g. Brand Merchandise, Custom Design..." />
+      </div>
+      <div class="form-group">
+        <label>Your Message</label>
+        <textarea placeholder="Tell me about your project..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send Message →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Shaid All Mahmud</div>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#portfolio">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 Shaid All Mahmud. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
